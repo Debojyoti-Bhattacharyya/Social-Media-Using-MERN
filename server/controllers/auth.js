@@ -1,6 +1,6 @@
 import bcrypt, { hash } from "bcrypt";
 import jwt from "jsonwebtoken";
-import User from "../models/Users.js";
+import User from "../models/User.js";
 
 /* REGISTER USER */
 // This has to be asynchronus because we are going to call mongo database and when we call mongo database then the call
