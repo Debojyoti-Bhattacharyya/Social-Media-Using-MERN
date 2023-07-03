@@ -17,20 +17,24 @@ import { verifyToken } from "./middleware/auth.js";
 import User from "./models/User.js";
 import Post from "./models/Post.js";
 import { users, posts } from "./data/index.js";
+
 /* CONFIGURATIONS */
 
 // Following two lines are required when you use type = module in index.js
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config(); // We invoke this so that we can use dotenv files
-const app = express(); // We invoke express app so that we can use our middleware
+// We invoke this so that we can use dotenv files
+dotenv.config();
+// We invoke express app so that we can use our middleware
+const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors()); // This will invoke cross origin resource sharing policies
+// This will invoke cross origin resource sharing policies
+app.use(cors());
 // The following line set up the dirname so that the assets can be stored locally, for production apps
 // is should store them in cloud like AWS S3
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
