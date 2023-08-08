@@ -68,10 +68,11 @@ mongoose
 	.connect(process.env.MONGO_URL, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
+		dbName: "test",
 	})
 	.then(() => {
 		app.listen(port, () => {
-			console.log(`Server Port: ${port}`);
+			console.log(`Connected to Database. Server Port: ${port}`);
 
 			/* ADD data one time */
 			// User.insertMany(users);

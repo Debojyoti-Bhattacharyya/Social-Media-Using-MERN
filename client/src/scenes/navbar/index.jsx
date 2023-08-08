@@ -30,13 +30,13 @@ const Navbar = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const user = useSelector((state) => state.user);
-	/**
-	 * This is built-in in material UI to determine if the current screen size of the user is below
+	/* This is built-in in material UI to determine if the current screen size of the user is below
 	 * the min screen width or higher than the minimum screen width
 	 */
-	const isNonMobileScreens = useMediaQuery();
+	const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+
 	const theme = useTheme();
-	const neutralTheme = theme.palette.neutral.light;
+	const neutralLight = theme.palette.neutral.light;
 	const dark = theme.palette.neutral.dark;
 	const background = theme.palette.background.default;
 	const primaryLight = theme.palette.primary.light;
@@ -63,7 +63,7 @@ const Navbar = () => {
 				</Typography>
 				{isNonMobileScreens && (
 					<FlexBetween
-						backgroundColor={neutraLight}
+						backgroundColor={neutralLight}
 						borderRadius="9px"
 						gap="3rem"
 						padding="0.1rem 1.5rem"
@@ -75,11 +75,12 @@ const Navbar = () => {
 					</FlexBetween>
 				)}
 			</FlexBetween>
+
 			{/* DESKTOP NAV */}
 			{isNonMobileScreens ? (
 				<FlexBetween gap="2rem">
 					<IconButton onClick={() => dispatch(setMode())}>
-						{theme.palette.mode === dark ? (
+						{theme.palette.mode === "dark" ? (
 							<DarkMode sx={{ fontSize: "25px" }} />
 						) : (
 							<LightMode sx={{ color: dark, fontSize: "25px" }} />
@@ -92,7 +93,7 @@ const Navbar = () => {
 						<Select
 							value={fullName}
 							sx={{
-								backgroundColor: neutraLight,
+								backgroundColor: neutralLight,
 								width: "150px",
 								borderRadius: "0.25rem",
 								p: "0.25rem 1rem",
@@ -101,13 +102,13 @@ const Navbar = () => {
 									width: "3rem",
 								},
 								"& .MuiSelect-select:focus": {
-									backgroundColor: neutraLight,
+									backgroundColor: neutralLight,
 								},
 							}}
 							input={<InputBase />}
 						>
 							<MenuItem value={fullName}>
-								<Typography value={fullName}></Typography>
+								<Typography>{fullName}</Typography>
 							</MenuItem>
 							<MenuItem onClick={() => dispatch(setLogout())}>
 								Log Out
@@ -122,6 +123,7 @@ const Navbar = () => {
 					<Menu />
 				</IconButton>
 			)}
+
 			{/* MOBILE NAV */}
 			{!isNonMobileScreens && isMobileMenuToggled && (
 				<Box
@@ -144,6 +146,7 @@ const Navbar = () => {
 							<Close />
 						</IconButton>
 					</Box>
+
 					{/* MENU ITEMS */}
 					<FlexBetween
 						display="flex"
